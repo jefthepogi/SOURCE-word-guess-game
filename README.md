@@ -1,6 +1,6 @@
-# FIND THE SOURCE — Tech Word Guess
+# DECODE: SOURCE — Tech Word Guess
 
-FIND THE SOURCE is a semantic word-guessing browser game. The frontend is built with vanilla HTML/CSS/JS, while the backend relies on a Python script utilizing natural language processing (Gensim) to precompute semantic word relationships into lightweight JSON files for offline-capable gameplay.
+DECODE: SOURCE is a semantic word-guessing browser game. The frontend is built with vanilla HTML/CSS/JS, while the backend relies on a Python script utilizing natural language processing (Gensim) to precompute semantic word relationships into lightweight JSON files for offline-capable gameplay.
 
 ## 📋 Prerequisites
 
