@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUESS THE SOURCE — Daily Tech Word Guess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    
+    <header>
+      <div class="header-left">
+        <span class="back-arrow">&#8592;</span>
+        <img src="src/assets/sourcelogo.png" class="logo-img"/>
+        <div class="title-block">
+          <span class="title">GUESS THE SOURCE</span>
+          <span class="subtitle">TECH WORD GUESS</span>
+        </div>
+      </div>
+      <span id="reset-btn" class="retry-icon">&#10227;</span>
+    </header>
+
+    <div class="meta-row">
+      <span class="date" id="date-display"></span>
+      
+      <div class="timer-config" id="timer-config">
+        <label for="timer-select">TIMER: </label>
+        <select id="timer-select">
+          <!-- timer in seconds -->
+          <option value="0">Off</option>
+          <option value="30">30 Secs</option>
+          <option value="60">1 Min</option>
+          <option value="180">3 Mins</option>
+          <option value="300">5 Mins</option>
+        </select>
+      </div>
+      
+      <span class="timer-display" id="timer-display" style="display:none;">00:00</span>
+      <span class="guess-count">GUESSES: <b id="guess-count">0</b></span>
+    </div>
+
+    <div class="input-wrap">
+      <input type="text" id="guess-input" placeholder="type a word" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="feedback" id="feedback"></div>
+
+    <div class="hint-banner" id="hint-banner">
+      <span class="hint-label">HINT</span>
+      <span id="hint-text"></span>
+    </div>
+
+    <div class="win-panel" id="win-panel">
+      <h2>SOLVED</h2>
+      <p id="win-text"></p>
+      <button class="btn" id="new-game-btn">New Word</button>
+    </div>
+
+    <div id="list-container">
+      <div class="empty-state">
+        No guesses yet. Type any word related to technology to get started.<br>
+        Rank 1 is the answer — the lower the number, the closer you are.
+      </div>
+    </div>
+
+    <footer>RANK 1 = THE ANSWER &nbsp;·&nbsp; LOWER IS CLOSER &nbsp;·&nbsp; HINT EVERY 7 GUESSES</footer>
+
+  </div>
+
+  <script src="src/js/ranker.js"></script>
+  <script src="src/js/game.js"></script>
+</body>
+</html>
