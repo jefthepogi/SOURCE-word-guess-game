@@ -1,0 +1,9 @@
+{
+    "name": "source-word-guess-game",
+    "scripts": {
+      "install:python": "pip install -r requirements.txt",
+      "build:data": "python src/build_wordbank.py",
+      "setup": "npm run install:python && npm run build:data",
+      "start": "python -m http.server 8000"
+    }
+  }

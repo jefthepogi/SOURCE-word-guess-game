@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIND THE SOURCE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    
+    <header>
+      <div class="header-left">
+        <img src="src/assets/sourcelogo.png" class="logo-img"/>
+        <div class="title-block">
+          <span class="title">FIND THE SOURCE</span>
+          <span class="subtitle">TECH WORD GUESS</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span id="leaderboard-btn" class="icon-btn" title="Leaderboard">&#127942;</span>
+        <span id="reset-btn" class="icon-btn retry-icon" title="New word">&#10227;</span>
+      </div>
+    </header>
+
+    <div class="meta-row">
+      <span class="date" id="date-display"></span>
+      <span class="timer-display" id="timer-display">05:00</span>
+      <span class="guess-count">GUESSES: <b id="guess-count">0</b></span>
+    </div>
+
+    <div class="player-row">
+      <label for="player-name-input">PLAYING AS:</label>
+      <input type="text" id="player-name-input" maxlength="18" placeholder="Anonymous" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="input-wrap">
+      <input type="text" id="guess-input" placeholder="type a word" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="feedback" id="feedback"></div>
+
+    <div class="hint-progress" id="hint-progress"></div>
+
+    <div class="hint-banner" id="hint-banner">
+      <span class="hint-label">HINT</span>
+      <span id="hint-text"></span>
+    </div>
+
+    <div class="win-panel" id="win-panel">
+      <h2>SOLVED</h2>
+      <p id="win-text"></p>
+      <button class="btn" id="new-game-btn">New Word</button>
+    </div>
+
+    <div id="list-container">
+      <div class="empty-state">
+        No guesses yet. Type any word related to technology to get started.<br>
+        Rank 1 is the answer — the lower the number, the closer you are.
+      </div>
+    </div>
+
+    <footer>RANK 1 = THE ANSWER &nbsp;·&nbsp; LOWER IS CLOSER &nbsp;·&nbsp; HINT EVERY 8 GUESSES</footer>
+
+  </div>
+
+  <div class="overlay" id="leaderboard-overlay">
+    <div class="leaderboard-panel" id="leaderboard-panel">
+      <div class="leaderboard-header">
+        <span>LEADERBOARD</span>
+        <span class="icon-btn" id="leaderboard-close" title="Close">&#10005;</span>
+      </div>
+      <div class="leaderboard-list" id="leaderboard-list">
+        <div class="empty-state">No solved words yet. Solve one to make the board!</div>
+      </div>
+      <div class="leaderboard-footer">
+        <button class="btn btn-ghost" id="leaderboard-reset">Reset Leaderboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/js/ranker.js"></script>
+  <script src="src/js/game.js"></script>
+</body>
+</html>

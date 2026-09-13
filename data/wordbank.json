@@ -1,0 +1,374 @@
+{
+    "monitor": [
+      "This word can also mean to watch or observe something carefully.",
+      "It is commonly found on a desk.",
+      "It displays information from a computer.",
+      "It is a separate screen commonly used with desktop computers."
+    ],
+    "mouse": [
+      "This word is also the name of a small animal.",
+      "You move it around to control something on a screen.",
+      "It usually has buttons and a scroll wheel.",
+      "You use it to point, click, and select things on a computer."
+    ],
+    "laptop": [
+      "Its name describes something you could use while sitting on your lap.",
+      "It is a portable type of computer.",
+      "It has a built-in screen and keyboard.",
+      "You can carry it around and use it without staying at a desk."
+    ],
+    "usb": [
+      "Its full name contains the word 'bus,' but it has nothing to do with transportation.",
+      "It is commonly used to connect devices and transfer data.",
+      "You may plug a cable or flash drive into it.",
+      "USB ports and cables are commonly used with computers and phones."
+    ],
+    "browser": [
+      "This word describes something used to explore or look through information.",
+      "It is software used to access the web.",
+      "You use it to visit websites and search online.",
+      "Chrome, Firefox, and Edge are examples of this."
+    ],
+    "website": [
+      "The word combines 'web' with a place or location.",
+      "It is something you visit using the internet.",
+      "It can contain pages, images, videos, and information.",
+      "You open one by entering its address or clicking a link."
+    ],
+    "cloud": [
+      "This word is normally associated with the sky, but technology uses it differently.",
+      "It allows information to be stored somewhere other than your device.",
+      "You can access your files through the internet.",
+      "Online services use this to store and access data remotely."
+    ],
+    "server": [
+      "In everyday language, this word can describe someone who serves people.",
+      "In technology, it provides information or services to other computers.",
+      "Websites and apps often depend on one of these.",
+      "It receives requests and sends data back to connected devices."
+    ],
+    "database": [
+      "This word combines something that means facts with something that stores them.",
+      "It organizes large amounts of information.",
+      "Websites and applications often use one to store user information.",
+      "It can contain tables, records, and other structured data."
+    ],
+    "data": [
+      "This word comes from a Latin word meaning 'things given.'",
+      "Computers process this to produce useful information.",
+      "Photos, numbers, messages, and documents can all be examples of it.",
+      "It is one of the most basic things stored and processed by computers."
+    ],
+    "file": [
+      "This word can also describe a collection of papers kept together.",
+      "Computers use it to store information.",
+      "Photos, documents, and videos can all be examples of this.",
+      "You can save, copy, rename, move, or delete one on a computer."
+    ],
+    "folder": [
+      "This word normally describes something used to organize papers.",
+      "Computers use it to organize files.",
+      "You can put documents, photos, and other files inside one.",
+      "It helps keep your computer files organized."
+    ],
+    "memory": [
+      "This word can describe the ability to remember something.",
+      "Computers also need this to work with information.",
+      "RAM is a type of this used by computers.",
+      "It temporarily holds information that programs are actively using."
+    ],
+    "storage": [
+      "This word describes keeping something for future use.",
+      "Technology uses it to keep digital information.",
+      "Files, photos, and videos take up this on your devices.",
+      "Hard drives, SSDs, and cloud services can provide this."
+    ],
+    "processor": [
+      "This word describes something that processes or handles something.",
+      "It is one of the most important parts inside a computer.",
+      "It performs instructions and calculations.",
+      "It is often called the CPU or the 'brain' of a computer."
+    ],
+    "software": [
+      "This word refers to something that is not a physical object.",
+      "Computers need it to perform specific tasks.",
+      "Apps and programs are types of this.",
+      "It is the set of programs and instructions that run on a device."
+    ],
+    "hardware": [
+      "This word refers to something physical rather than something purely digital.",
+      "Computers are made from many different parts of this type.",
+      "A keyboard, mouse, and processor are examples.",
+      "It refers to the physical components of a computer or device."
+    ],
+    "code": [
+      "This word can mean a system of symbols or instructions.",
+      "Computers use it to understand what they should do.",
+      "Programmers write this using programming languages.",
+      "It is the written instructions behind many apps and websites."
+    ],
+    "programming": [
+      "This word describes the act of creating instructions.",
+      "It involves telling computers how to perform tasks.",
+      "People do this using languages such as Python, Java, or C++.",
+      "It is the process of writing and organizing computer code."
+    ],
+    "algorithm": [
+      "This word describes a method for solving a problem.",
+      "It usually involves a sequence of steps.",
+      "Computers use these to process information and make decisions.",
+      "A recipe-like set of instructions for solving a problem is an example."
+    ],
+    "app": [
+      "This word is a shortened form of a longer technology word.",
+      "You probably use several of these every day.",
+      "You can download them from an app store.",
+      "Games, social media, and messaging programs on phones are examples."
+    ],
+    "icon": [
+      "This word can also describe a famous or important person.",
+      "In technology, it is usually a small visual symbol.",
+      "You often see these on your phone or computer screen.",
+      "Tapping or clicking one can open an app or perform an action."
+    ],
+    "notification": [
+      "This word means information given to make someone aware of something.",
+      "Your devices can show these when something happens.",
+      "Messages and app updates can trigger one.",
+      "It often appears as a pop-up, sound, or small alert on your phone."
+    ],
+    "cable": [
+      "This word refers to something used to connect two points.",
+      "Technology uses many different types of these.",
+      "They can carry power, data, or signals.",
+      "USB, HDMI, and Ethernet are common examples."
+    ],
+    "adapter": [
+      "This word describes something that makes two different things work together.",
+      "You may need one when connectors or plugs do not match.",
+      "Phones and laptops often use these with chargers and ports.",
+      "It can convert or connect one type of connection to another."
+    ],
+    "router": [
+      "This word normally describes something that directs a route.",
+      "It helps devices communicate across a network.",
+      "Many homes have one that provides wireless internet.",
+      "It sends network traffic between your devices and the internet."
+    ],
+    "network": [
+      "This word describes a group of connected things.",
+      "Computers and devices can form one to communicate.",
+      "Wi-Fi is one way devices can connect to one.",
+      "It allows devices to communicate and share information."
+    ],
+    "signal": [
+      "This word can mean a sign that communicates information.",
+      "Phones and wireless devices rely on this.",
+      "You may check its strength when your connection is poor.",
+      "The bars on your phone often indicate the strength of this."
+    ],
+    "screen": [
+      "This word can also mean to filter or evaluate something.",
+      "You look at one when using many electronic devices.",
+      "Phones, computers, and televisions commonly have one.",
+      "It displays the images and information you interact with."
+    ],
+    "touchscreen": [
+      "This word combines an action with something you look at.",
+      "You interact with it directly using your fingers.",
+      "Phones and tablets commonly use this technology.",
+      "Tapping and swiping the display are ways of using it."
+    ],
+    "camera": [
+      "This word originally referred to a room or chamber.",
+      "It is used to capture moments visually.",
+      "It can take photographs and record videos.",
+      "Phones, laptops, and standalone devices can all have one."
+    ],
+    "speaker": [
+      "This word can also describe someone giving a speech.",
+      "Technology uses it to produce sound.",
+      "You can connect one to a phone or computer to hear audio.",
+      "It turns an electrical or digital signal into sound you can hear."
+    ],
+    "microphone": [
+      "People often shorten this word to three letters.",
+      "It captures sounds and voices.",
+      "You might use one during a presentation or video call.",
+      "It is the device that picks up your voice for recording or communication."
+    ],
+    "webcam": [
+      "This word combines the web with something used to capture images.",
+      "It is commonly built into laptops.",
+      "It lets people see you during an online meeting.",
+      "It is a camera designed for computers and online video."
+    ],
+    "selfie": [
+      "This word describes a picture taken by the person in the picture.",
+      "Phones made this type of photo extremely common.",
+      "People usually use the front-facing camera for one.",
+      "It is a self-taken photo, often shared online."
+    ],
+    "video": [
+      "This word comes from Latin and is connected with seeing.",
+      "It is one of the most common forms of digital media.",
+      "It combines moving images, usually with sound.",
+      "YouTube, TikTok, and streaming services contain millions of these."
+    ],
+    "streaming": [
+      "This word originally relates to something flowing continuously.",
+      "Technology uses it for media delivered over the internet.",
+      "You can watch movies or listen to music this way.",
+      "Instead of downloading the entire file first, you receive the media as it plays."
+    ],
+    "social": [
+      "This word relates to interaction between people.",
+      "Technology has made this a major part of online communication.",
+      "It is commonly paired with the word 'media.'",
+      "Platforms where people post, share, follow, and comment are called this type of media."
+    ],
+    "email": [
+      "This word is a shortened form of 'electronic mail.'",
+      "It is one of the oldest common forms of digital communication.",
+      "You can send messages and attach files using it.",
+      "Messages sent through Gmail or Outlook are examples."
+    ],
+    "password": [
+      "This word combines two everyday words.",
+      "It is something you normally keep private.",
+      "It helps protect access to an account.",
+      "You enter it when logging into many websites and applications."
+    ],
+    "username": [
+      "This word combines a person who uses something with a name.",
+      "It identifies you when using many online services.",
+      "It is often entered together with a password.",
+      "It is the name or ID you use to log into an account."
+    ],
+    "login": [
+      "This word describes entering a system rather than physically entering a building.",
+      "You do this when accessing a protected account.",
+      "It usually requires a username and password.",
+      "You do this before accessing many websites and apps."
+    ],
+    "security": [
+      "This word is about keeping something safe from danger or unwanted access.",
+      "It is especially important when using the internet.",
+      "Passwords and authentication help provide it.",
+      "It protects devices, accounts, networks, and information."
+    ],
+    "privacy": [
+      "This word describes keeping certain information away from others.",
+      "It is an important concern when using websites and apps.",
+      "Personal information can be protected by it.",
+      "It concerns who can see or use your personal information."
+    ],
+    "virus": [
+      "This word is also used in biology.",
+      "In computers, it refers to harmful software.",
+      "It can spread between files or devices.",
+      "Antivirus software can detect and remove this type of threat."
+    ],
+    "backup": [
+      "This word means keeping something as protection in case the original is lost.",
+      "It is important for protecting digital files.",
+      "You can make a copy of your photos and documents this way.",
+      "A backup lets you restore information after losing the original."
+    ],
+    "update": [
+      "This word means bringing something to a newer or more current state.",
+      "Your devices may ask you to do this regularly.",
+      "Apps and operating systems receive these to improve or fix things.",
+      "Installing a newer version of software is an example."
+    ],
+    "download": [
+      "The word describes moving something downward.",
+      "You do this when getting a file from the internet.",
+      "Photos, apps, videos, and documents can all be transferred this way.",
+      "It means moving digital information from the internet onto your device."
+    ],
+    "upload": [
+      "This word describes moving something upward.",
+      "You do this when sending a file to an online service.",
+      "Posting a photo or video can involve this process.",
+      "It means transferring a file from your device to the internet or a server."
+    ],
+    "printer": [
+      "This word once described a person's profession.",
+      "It turns digital information into something physical.",
+      "It usually works with paper and ink or toner.",
+      "It produces physical copies of documents and images."
+    ],
+    "scanner": [
+      "This word describes something that examines or reads something carefully.",
+      "It can turn physical documents into digital files.",
+      "You place a paper document on one to capture it.",
+      "It is commonly used to digitize documents and images."
+    ],
+    "remote": [
+      "This word means something that is far away.",
+      "Technology uses it to control devices from a distance.",
+      "You might use one while sitting on a couch.",
+      "A television controller is commonly called a remote."
+    ],
+    "controller": [
+      "This word describes something used to control another thing.",
+      "Gamers commonly use one.",
+      "It usually has buttons and sometimes sticks.",
+      "It lets you control characters and actions in video games."
+    ],
+    "console": [
+      "This word can also describe a type of control panel.",
+      "Many people associate it with gaming.",
+      "It connects to a television or monitor for playing games.",
+      "PlayStation, Xbox, and Nintendo Switch are examples."
+    ],
+    "pixel": [
+      "Its name comes from combining two words related to pictures.",
+      "It is one of the tiny building blocks of a digital image.",
+      "Screens are made up of millions of these.",
+      "More of these can help create higher-resolution images."
+    ],
+    "resolution": [
+      "This word can also mean a decision made after considering a problem.",
+      "In technology, it describes how much visual detail something can show.",
+      "It is commonly associated with screens and images.",
+      "1080p and 4K are examples of display resolutions."
+    ],
+    "bluetooth": [
+      "Its unusual name comes from a historical figure.",
+      "It allows nearby devices to communicate wirelessly.",
+      "Headphones, speakers, keyboards, and phones commonly use it.",
+      "You often 'pair' devices when connecting them with this technology."
+    ],
+    "qr": [
+      "Its name is an abbreviation involving the word 'quick.'",
+      "It is made from a pattern of small squares.",
+      "You usually scan it with a phone camera.",
+      "Scanning one can open a website, menu, form, or other information."
+    ],
+    "barcode": [
+      "This technology uses a visual pattern to represent information.",
+      "You often see one on products in stores.",
+      "A scanner reads it to identify an item.",
+      "The lines and numbers on a product label form one."
+    ],
+    "gps": [
+      "Its name is an abbreviation for a system that helps determine position.",
+      "Phones and cars commonly use it.",
+      "It helps you figure out where you are and where to go.",
+      "It uses satellites to provide location and navigation information."
+    ],
+    "smartphone": [
+      "This word combines an everyday device with the idea of intelligence.",
+      "It is more than just a device for making calls.",
+      "It can run apps, browse the internet, and take photos.",
+      "Modern phones such as iPhones and Android devices are examples."
+    ],
+    "tablet": [
+      "This word can also describe a small pill or an ancient writing surface.",
+      "Most modern versions are controlled by touching the screen.",
+      "It is larger than a phone but usually smaller than a laptop.",
+      "An iPad is a famous example of this type of device."
+    ]
+  }
