@@ -16,8 +16,7 @@ This project uses `package.json` scripts to bridge the Python and frontend envir
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/GUESS THE SOURCE.git
-
+git clone https://github.com/yourusername/SOURCE-word-guess-game.git
 ```
 
 **2. Set up a Python Virtual Environment (Recommended)**
