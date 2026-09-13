@@ -1,6 +1,6 @@
-# GUESS THE SOURCE — Tech Word Guess
+# DECODE: SOURCE — Tech Word Guess
 
-GUESS THE SOURCE is a semantic word-guessing browser game. The frontend is built with vanilla HTML/CSS/JS, while the backend relies on a Python script utilizing natural language processing (Gensim) to precompute semantic word relationships into lightweight JSON files for offline-capable gameplay.
+DECODE: SOURCE is a semantic word-guessing browser game. The frontend is built with vanilla HTML/CSS/JS, while the backend relies on a Python script utilizing natural language processing (Gensim) to precompute semantic word relationships into lightweight JSON files for offline-capable gameplay.
 
 ## 📋 Prerequisites
 
@@ -16,8 +16,7 @@ This project uses `package.json` scripts to bridge the Python and frontend envir
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/GUESS THE SOURCE.git
-cd GUESS THE SOURCE
+git clone https://github.com/yourusername/SOURCE-word-guess-game.git
 ```
 
 **2. Set up a Python Virtual Environment (Recommended)**
