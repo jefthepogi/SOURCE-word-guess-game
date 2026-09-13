@@ -18,7 +18,7 @@ let state = {
 let timerInterval = null;
 let timeRemaining = 0;
 let gameActive = true;
-const GUESSES_TO_HINT = 3
+const GUESSES_TO_HINT = 8
 
 async function initGame() {
   document.getElementById("date-display").textContent =
@@ -99,6 +99,13 @@ function render() {
   sorted.forEach((g, idx) => {
     const row = document.createElement("div");
     const progressPercent = getRankProgress(g.rank);
+
+    if (idx == 0) {
+      const label = document.createElement("div");
+      label.className = "divider-label";
+      label.textContent = "ALL GUESSES · CLOSEST FIRST";
+      dom.list.append(label);
+    }
 
     // Force label append
     if (idx == 1) {
