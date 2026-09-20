@@ -32,13 +32,15 @@ async function initGame() {
   const res = await fetch("./data/wordbank.json");
   const masterBank = await res.json();
 
-  // 2. Pick a random target
+  // 2 & 3. Pick a random target whose ranking dictionary actually loads
   const keys = Object.keys(masterBank);
-  state.targetKey = keys[Math.floor(Math.random() * keys.length)];
-  state.targetHints = masterBank[state.targetKey];
-
-  // 3. Load the semantic ranking data
-  const loaded = await loadTargetDictionary(state.targetKey);
+  let loaded = false;
+  while (!loaded && keys.length) {
+    const i = Math.floor(Math.random() * keys.length);
+    state.targetKey = keys.splice(i, 1)[0];
+    state.targetHints = masterBank[state.targetKey];
+    loaded = await loadTargetDictionary(state.targetKey);
+  }
   if (loaded) {
     dom.input.disabled = false;
     dom.input.focus();
