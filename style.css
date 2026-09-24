@@ -7,7 +7,7 @@
     --green-dim: #1f5c2e;
     --green-deep: #0f3d1c;
     --white: #f2f6f0;
-    --gray: #7c8a7a;
+    --gray: #aab8a9;
     --border: #ffffff;
 }
 
@@ -28,12 +28,16 @@ body {
 body {
     display: flex;
     justify-content: center;
-    padding: 0 0 60px;
+    overflow: hidden;
 }
 
 .app {
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* ---------- HEADER ---------- */
@@ -41,7 +45,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px;
+    padding: 18px 24px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -107,14 +111,14 @@ header {
 }
 
 .title {
-    font-size: 19px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--white);
 }
 
 .subtitle {
-    font-size: 10px;
+    font-size: 12px;
     color: var(--green);
     letter-spacing: 2px;
 }
@@ -123,13 +127,21 @@ header {
     transform: rotate(90deg) translateY(0);
 }
 
+.music-toggle.muted {
+    color: var(--gray);
+}
+
+.music-toggle.muted:hover {
+    color: var(--white);
+}
+
 /* ---------- META ROW ---------- */
 .meta-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px 8px;
-    font-size: 13px;
+    padding: 10px 20px 4px;
+    font-size: 15px;
 }
 
 .date {
@@ -148,9 +160,9 @@ header {
 }
 
 .divider-label{
-    padding:14px 20px 2px;
-    font-size:10px;
-    letter-spacing:2px;
+    padding:8px 20px 2px;
+    font-size:12px;
+    letter-spacing:1.5px;
     color:var(--gray);
   }
 
@@ -159,28 +171,33 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 0 20px 10px;
+    padding: 0 20px 6px;
 }
 
 .player-row label {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 1px;
     color: var(--gray);
     flex-shrink: 0;
 }
 
 #player-name-input {
-    flex: 1;
-    max-width: 200px;
+    flex: 0 1 auto;
+    width: 10ch;
+    min-width: 8ch;
+    max-width: 150px;
     background: transparent;
     border: none;
     border-bottom: 1px solid var(--border);
     color: var(--green);
     font-family: inherit;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
-    padding: 2px 2px 4px;
+    padding: 4px 2px 6px;
     outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: border-color 0.15s ease;
 }
 
@@ -193,10 +210,17 @@ header {
     border-bottom-color: var(--green);
 }
 
+#player-name-input:disabled {
+    opacity: 1;
+    color: var(--green);
+    cursor: not-allowed;
+    -webkit-text-fill-color: var(--green);
+}
+
 
 /* ---------- INPUT ---------- */
 .input-wrap {
-    padding: 10px 20px 16px;
+    padding: 6px 20px 8px;
 }
 
 #guess-input {
@@ -204,9 +228,9 @@ header {
     background: var(--panel);
     border: 2px solid var(--border);
     border-radius: 8px;
-    padding: 14px 16px;
+    padding: 16px 18px;
     color: var(--white);
-    font-size: 16px;
+    font-size: 20px;
     font-family: inherit;
     outline: none;
     transition: border-color 0.15s ease;
@@ -221,9 +245,10 @@ header {
 }
 
 .feedback {
-    min-height: 18px;
-    padding: 2px 22px 0;
-    font-size: 12px;
+    min-height: 22px;
+    padding: 2px 22px 4px;
+    font-size: 15px;
+    font-weight: 700;
     color: var(--green);
 }
 
@@ -233,10 +258,15 @@ header {
 
 /* ---------- HINT PROGRESS ---------- */
 .hint-progress {
-    margin: 0 22px 6px;
-    font-size: 10.5px;
-    letter-spacing: 1px;
-    color: var(--gray);
+    margin: 0 22px 4px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--white);
+    background: var(--green-deep);
+    border-left: 4px solid var(--green);
+    border-radius: 4px;
+    padding: 8px 12px;
     height: 0;
     opacity: 0;
     overflow: hidden;
@@ -250,13 +280,13 @@ header {
 
 /* ---------- HINT BANNER ---------- */
 .hint-banner {
-    margin: 4px 20px 12px;
-    padding: 12px 14px;
+    margin: 2px 20px 6px;
+    padding: 10px 14px;
     background: var(--green-deep);
     border: 1px solid var(--green-dim);
     border-left: 4px solid var(--green);
     border-radius: 6px;
-    font-size: 12.5px;
+    font-size: 15px;
     color: var(--white);
     display: none;
 }
@@ -269,9 +299,41 @@ header {
     color: var(--green);
     font-weight: 700;
     letter-spacing: 1px;
-    font-size: 10px;
+    font-size: 12px;
     display: block;
     margin-bottom: 4px;
+}
+
+/* Only the guess history scrolls. The header, timer, and input stay fixed. */
+#list-container {
+    flex: 1 1 auto;
+    min-height: 70px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    padding: 0 8px 8px 0;
+    scrollbar-color: var(--green) var(--panel);
+    scrollbar-width: auto;
+}
+
+#list-container::-webkit-scrollbar {
+    width: 14px;
+}
+
+#list-container::-webkit-scrollbar-track {
+    background: var(--panel);
+    border-radius: 8px;
+}
+
+#list-container::-webkit-scrollbar-thumb {
+    background: var(--green-dim);
+    border: 3px solid var(--panel);
+    border-radius: 8px;
+}
+
+#list-container::-webkit-scrollbar-thumb:hover {
+    background: var(--green);
 }
 
 /* ---------- GUESS ROWS ---------- */
@@ -360,19 +422,19 @@ header {
 
 .guess-row .word {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     text-transform: lowercase;
 }
 
 .guess-row .rank {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 /* ---------- WIN PANEL ---------- */
 .win-panel {
-    margin: 16px 20px 10px;
-    padding: 20px;
+    margin: 8px 20px 6px;
+    padding: 16px;
     background: var(--panel-2);
     border: 1px solid var(--green);
     border-radius: 10px;
@@ -387,13 +449,13 @@ header {
 .win-panel h2 {
     color: var(--green);
     margin: 0 0 6px;
-    font-size: 18px;
+    font-size: 22px;
     letter-spacing: 1px;
 }
 
 .win-panel p {
-    color: var(--gray);
-    font-size: 13px;
+    color: var(--white);
+    font-size: 16px;
     margin: 0 0 14px;
 }
 
@@ -407,7 +469,7 @@ header {
     font-weight: 700;
     letter-spacing: 0.5px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .btn:hover {
@@ -426,19 +488,23 @@ header {
     background: transparent;
 }
 
+.empty-state strong {
+    color: var(--green);
+}
+
 .empty-state {
-    padding: 30px 20px;
+    padding: 18px 20px;
     text-align: center;
     color: var(--gray);
-    font-size: 12.5px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.5;
 }
 
 footer {
     text-align: center;
     color: var(--border);
-    font-size: 10px;
-    padding: 26px 20px 0;
+    font-size: 13px;
+    padding: 8px 20px 6px;
     letter-spacing: 1px;
 }
 
@@ -446,14 +512,25 @@ footer {
 /* Timer */
 .timer-display {
     color: var(--green);
+    background: var(--green-deep);
+    border: 1px solid var(--green-dim);
+    border-radius: 6px;
+    padding: 6px 12px;
+    min-width: 92px;
+    text-align: center;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 26px;
+    font-variant-numeric: tabular-nums;
     letter-spacing: 1px;
-    transition: color 0.2s ease;
+    text-shadow: 0 0 8px rgba(57, 211, 83, 0.35);
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .timer-display.danger {
-    color: #e05656;
+    color: #ff8585;
+    background: #3b1515;
+    border-color: #e05656;
+    text-shadow: 0 0 8px rgba(224, 86, 86, 0.45);
     animation: pulse 1s infinite;
 }
 

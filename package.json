@@ -1,8 +1,8 @@
 {
   "name": "source-word-guess-game",
-  "productName": "Find The Source",
+  "productName": "DECODE SOURCE v2",
   "version": "1.0.0",
-  "description": "FIND THE SOURCE - a tech word guessing game",
+  "description": "Find The Source - a tech word guessing game",
   "author": "Dell",
   "main": "main.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "electron-builder": "^26.0.0"
   },
   "build": {
-    "appId": "com.findthesource.game",
-    "productName": "Find The Source",
+    "appId": "com.findthesource.game.v2",
+    "productName": "DECODE SOURCE v2",
     "asar": false,
     "directories": {
       "output": "dist",
