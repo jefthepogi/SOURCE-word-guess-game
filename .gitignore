@@ -1,4 +1,30 @@
+# Dependencies
 node_modules/
+
+# Python virtual environments
 venv/
+.venv/
+
+# Electron build output and installers
 dist/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+
+# Local configuration and environment files
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
 *.bak

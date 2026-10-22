@@ -21,6 +21,27 @@ The semantic rankings are precomputed with Python (Gensim) into JSON files in `d
 
 ---
 
+## 🎮 Current game settings
+
+- Each round lasts **2 minutes**.
+- A hint is revealed every **5 guesses**.
+- A solved word goes on a **10-round cooldown** before it can appear again.
+- The game avoids repeating the previous word when another choice is available.
+- The word bank currently contains **100 technology-related words**.
+- The game uses four supplied MP3 files under `src/assets/audio/`: `decode-source-theme.mp3` for normal gameplay, `decode-source-urgent.mp3` for the final 30 seconds, `decode-source-solved.mp3` for a win, and `decode-source-game-over.mp3` for a loss. The normal and urgent tracks loop at 18% volume.
+- Only the guess list scrolls; the header, timer, input, and hint area stay fixed.
+- The game window is larger by default for improved readability.
+- The timer becomes more prominent during the final 30 seconds.
+- When the timer reaches 30 seconds, the normal soundtrack crossfades quickly (300 ms) into `decode-source-urgent.mp3`; the urgent track starts from its beginning and loops at normal speed for a fast, intense final countdown.
+- When the round ends, the active background soundtrack fades out and the matching Solved or Game Over MP3 plays once. Pressing **New Word** resets the audio state; the normal soundtrack starts again only after the next valid guess.
+
+- The `PLAYING AS` field is editable before the first guess, then locked for the rest of the round. The saved name remains visible and can be edited again after starting a new game.
+- The name field automatically resizes to fit the entered name without stretching across the screen.
+
+Music starts only after the player submits the first valid guess, not when clicking interface elements or editing the player name. This also satisfies browser autoplay requirements. Electron is configured with an explicit autoplay policy, and the custom `app://` protocol serves the MP3 files with `audio/mpeg` content type and range support so the same paths work in development and in the packaged app. Use the music button in the header to mute or unmute it.
+
+---
+
 ## 🚀 Quick Start (desktop app)
 
 **1. Get the project**
@@ -72,8 +93,8 @@ This runs `electron-builder --win` and writes the results to the `dist/` folder:
 
 | File | What it is |
 | --- | --- |
-| `Find The Source Setup 1.0.0.exe` | Installer. Lets the player choose an install folder and adds a shortcut. |
-| `Find The Source 1.0.0.exe` | Portable version. One file, no install. Easiest to share. |
+| `DECODE SOURCE v2 Setup 1.0.0.exe` | Installer. Lets the player choose an install folder and adds a shortcut. |
+| `DECODE SOURCE v2.exe` | Portable version. One file, no install. Easiest to share. |
 
 Everything else in `dist/` (`win-unpacked/`, `.blockmap`, `.yaml`, `.yml`) is build leftovers and does not need to be shared.
 
@@ -127,7 +148,7 @@ pip install -r tools/requirements.txt
 ]
 ```
 
-A hint is revealed every 8 guesses. Four hints per word is the convention.
+A hint is revealed every **5 guesses**. Four hints per word is the current convention. Hints should describe what the technology does or where it is used without naming the answer or directly revealing its first letter.
 
 **2. Build the ranking data.** Run this from the **project root**, because the script reads `data/` relative to where you run it:
 
@@ -135,9 +156,13 @@ A hint is revealed every 8 guesses. Four hints per word is the convention.
 venv\Scripts\python.exe tools\build_wordbank.py
 ```
 
-(macOS/Linux with the venv active: `python tools/build_wordbank.py`.)
+**3. Validate the word bank.** Run this from the project root after adding or changing words:
 
-The first run downloads a ~128 MB language model, which is cached afterwards. It regenerates `data/<word>.json` for every word in the bank and takes a few minutes.
+```powershell
+python tools/validate_wordbank.py
+```
+
+The validator checks that every word has valid hints, a matching ranking file, and a rank-1 entry for the correct answer.
 
 **Words the model doesn't know.** If the script prints `Skipping 'word', not in the model's vocabulary`, no data file is created for it. The game skips any word without a data file, so it simply never appears. To include such a word (for example `selfie`), copy `tools/make_selfie.py`, change `TARGET` and `FALLBACK_WORDS` at the top to related words the model does know, and run it from the project root. It blends the related words to approximate the target.
 
@@ -156,7 +181,8 @@ SOURCE-word-guess-game-master/
 ├── src/
 │   ├── assets/          Logo and icons
 │   └── js/
-│       ├── game.js      Game logic, timer, hints, leaderboard
+│       ├── game.js      Game logic, 2-minute timer, hints, cooldowns, leaderboard
+│       ├── music.js     MP3 background-music controller
 │       └── ranker.js    Loads ranking data and scores guesses
 ├── data/
 │   ├── wordbank.json    Target words and their hints
@@ -164,6 +190,7 @@ SOURCE-word-guess-game-master/
 ├── tools/               Python scripts for rebuilding word data
 │   ├── build_wordbank.py
 │   ├── make_selfie.py
+│   ├── validate_wordbank.py
 │   └── requirements.txt
 └── dist/                Packaged app output (created by npm run dist)
 ```

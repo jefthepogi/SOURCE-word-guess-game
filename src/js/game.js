@@ -13,16 +13,80 @@ let state = {
   guesses: [],
   hintsShown: 0,
   targetHints: [],
+  previousTarget: null,
+  round: 0,
+  urgentAudioTriggered: false,
 };
 
 let timerInterval = null;
 let timeRemaining = 0;
+let timerDeadline = 0;
 let gameActive = true;
-const GUESSES_TO_HINT = 8;
-const DEFAULT_TIME = 300; // 5 minutes, fixed
+const GUESSES_TO_HINT = 5;
+const DEFAULT_TIME = 120; // 2 minutes, fixed
 const LEADERBOARD_KEY = "gts_leaderboard";
 const LEADERBOARD_MAX = 10;
 const PLAYER_NAME_KEY = "gts_player_name";
+const WORD_COOLDOWN_KEY = "gts_word_cooldowns";
+const ROUND_KEY = "gts_round";
+const WORD_COOLDOWN_ROUNDS = 10;
+
+function loadWordCooldowns() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(WORD_COOLDOWN_KEY) || "{}");
+    return saved && typeof saved === "object" ? saved : {};
+  } catch (err) {
+    return {};
+  }
+}
+
+function getNextRound() {
+  const nextRound = Number(localStorage.getItem(ROUND_KEY) || 0) + 1;
+  try {
+    localStorage.setItem(ROUND_KEY, String(nextRound));
+  } catch (err) {
+    console.error("Round counter failed to save:", err);
+  }
+  return nextRound;
+}
+
+function markWordGuessed(word, round) {
+  try {
+    const cooldowns = loadWordCooldowns();
+    cooldowns[word] = round;
+    localStorage.setItem(WORD_COOLDOWN_KEY, JSON.stringify(cooldowns));
+  } catch (err) {
+    console.error("Word cooldown failed to save:", err);
+  }
+}
+
+function shuffle(items) {
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  return items;
+}
+
+function getNextTargetOrder(allWords, round, previousWord) {
+  const cooldowns = loadWordCooldowns();
+  const isAvailable = (word) => {
+    const lastGuessed = Number(cooldowns[word] || 0);
+    return round - lastGuessed >= WORD_COOLDOWN_ROUNDS;
+  };
+
+  let available = allWords.filter((word) => isAvailable(word));
+  if (available.length === 0) {
+    // The bank can be small: use the words guessed longest ago.
+    const oldestRound = Math.min(...allWords.map((word) => Number(cooldowns[word] || 0)));
+    available = allWords.filter((word) => Number(cooldowns[word] || 0) === oldestRound);
+  }
+
+  // Never repeat the immediately previous word when another choice exists.
+  const notPrevious = available.filter((word) => word !== previousWord);
+  const pool = notPrevious.length ? notPrevious : available;
+  return shuffle(pool);
+}
 
 async function initGame() {
   document.getElementById("date-display").textContent =
@@ -32,16 +96,17 @@ async function initGame() {
   const res = await fetch("./data/wordbank.json");
   const masterBank = await res.json();
 
-  // 2 & 3. Pick a random target whose ranking dictionary actually loads
-  const keys = Object.keys(masterBank);
+  // 2 & 3. Pick a word outside its cooldown whenever possible.
+  state.round = getNextRound();
+  const keys = getNextTargetOrder(Object.keys(masterBank), state.round, state.previousTarget);
   let loaded = false;
   while (!loaded && keys.length) {
-    const i = Math.floor(Math.random() * keys.length);
-    state.targetKey = keys.splice(i, 1)[0];
+    state.targetKey = keys.shift();
     state.targetHints = masterBank[state.targetKey];
     loaded = await loadTargetDictionary(state.targetKey);
   }
   if (loaded) {
+    state.previousTarget = state.targetKey;
     dom.input.disabled = false;
     dom.input.focus();
   }
@@ -95,7 +160,9 @@ function render() {
 
   const sorted = [...state.guesses].sort((a, b) => a.rank - b.rank);
 
-  if (sorted[0]?.rank === 1) {
+  const isSolved = sorted[0]?.rank === 1;
+
+  if (isSolved) {
     document.getElementById(
       "win-text"
     ).textContent = `Solved in ${state.guesses.length} guesses!`;
@@ -105,6 +172,8 @@ function render() {
 
   const dueHints = Math.floor(state.guesses.length / GUESSES_TO_HINT);
   if (
+    gameActive &&
+    !isSolved &&
     dueHints > state.hintsShown &&
     state.hintsShown < state.targetHints.length
   ) {
@@ -163,20 +232,39 @@ function updateHintProgress() {
 
 initGame();
 
-// ---------- Timer (fixed 5-minute default) ----------
+// ---------- Timer (fixed 3-minute default) ----------
+
+function lockPlayerName() {
+  if (!playerNameInput) return;
+  playerNameInput.disabled = true;
+  playerNameInput.readOnly = true;
+  playerNameInput.setAttribute("aria-disabled", "true");
+}
+
+function unlockPlayerName() {
+  if (!playerNameInput) return;
+  playerNameInput.disabled = false;
+  playerNameInput.readOnly = false;
+  playerNameInput.removeAttribute("aria-disabled");
+}
 
 function startTimer() {
+  lockPlayerName();
+  if (window.Soundtrack) window.Soundtrack.beginRound();
   timeRemaining = DEFAULT_TIME;
+  timerDeadline = Date.now() + DEFAULT_TIME * 1000;
   updateTimerUI();
 
   timerInterval = setInterval(() => {
-    timeRemaining--;
+    // Use a wall-clock deadline so a delayed tab/window cannot skip the urgent
+    // transition or make the round longer than two minutes.
+    timeRemaining = Math.max(0, Math.ceil((timerDeadline - Date.now()) / 1000));
     updateTimerUI();
 
     if (timeRemaining <= 0) {
       endGame(false);
     }
-  }, 1000);
+  }, 250);
 }
 
 function updateTimerUI() {
@@ -188,12 +276,22 @@ function updateTimerUI() {
   timerEl.textContent = `${m}:${s}`;
 
   timerEl.classList.toggle("danger", timeRemaining <= 30);
+  if (timeRemaining <= 30 && !state.urgentAudioTriggered && window.Soundtrack) {
+    state.urgentAudioTriggered = true;
+    window.Soundtrack.startUrgentSection();
+  }
 }
 
 function endGame(isWin) {
   clearInterval(timerInterval);
+  if (window.Soundtrack) {
+    window.Soundtrack.stop();
+    if (isWin) window.Soundtrack.playSolved();
+    else window.Soundtrack.playGameOver();
+  }
   gameActive = false;
   dom.input.disabled = true;
+  dom.hintBanner.classList.remove("show");
 
   const winHeading = dom.winPanel.querySelector("h2");
 
@@ -204,6 +302,7 @@ function endGame(isWin) {
     winHeading.textContent = "SOLVED";
     winHeading.style.color = "var(--green)";
     dom.winPanel.style.borderColor = "var(--green)";
+    markWordGuessed(state.targetKey, state.round);
     saveLeaderboardEntry(state.targetKey, state.guesses.length, DEFAULT_TIME - timeRemaining);
   } else {
     document.getElementById(
@@ -224,7 +323,7 @@ function ResetStates() {
   clearInterval(timerInterval);
   timeRemaining = DEFAULT_TIME;
   const timerEl = document.getElementById("timer-display");
-  timerEl.textContent = "05:00";
+  updateTimerUI();
   timerEl.classList.remove("danger");
 
   // 2. Reset game state
@@ -232,6 +331,7 @@ function ResetStates() {
   state.guesses = [];
   state.hintsShown = 0;
   state.targetHints = [];
+  state.urgentAudioTriggered = false;
 
   // 3. Clear all UI elements instantly
   dom.winPanel.classList.remove("show");
@@ -240,11 +340,17 @@ function ResetStates() {
   dom.feedback.textContent = "";
   dom.feedback.classList.remove("error", "shake");
   dom.input.value = "";
+  if (playerNameInput) {
+    playerNameInput.value = getPlayerName();
+    resizePlayerNameInput();
+    unlockPlayerName();
+  }
   document.getElementById("hint-progress").classList.remove("show");
 
   // 4. Force the screen to clear before loading the new word
   render();
   initGame();
+  if (window.Soundtrack) window.Soundtrack.prepare();
 }
 
 document.getElementById("new-game-btn").addEventListener("click", ResetStates);
@@ -388,6 +494,19 @@ function setPlayerName(name) {
 const playerNameInput = document.getElementById("player-name-input");
 playerNameInput.value = getPlayerName();
 
+function resizePlayerNameInput() {
+  const length = playerNameInput.value.length || playerNameInput.placeholder.length;
+  playerNameInput.style.width = `${Math.min(18, Math.max(8, length + 1))}ch`;
+  playerNameInput.title = playerNameInput.value;
+}
+resizePlayerNameInput();
+unlockPlayerName();
+
+playerNameInput.addEventListener("input", () => {
+  resizePlayerNameInput();
+  // Save continuously so starting a round can never clear the player's name.
+  setPlayerName(playerNameInput.value);
+});
 playerNameInput.addEventListener("change", () => {
   setPlayerName(playerNameInput.value);
 });
